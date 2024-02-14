@@ -36,7 +36,7 @@ resource "aws_codepipeline" "pipeline" {
   stage {
     name = "Prod"
     action {
-      name            = "Build"
+      name            = "BuildAndTest"
       category        = "Build"
       owner           = "AWS"
       provider        = "CodeBuild"
@@ -45,18 +45,6 @@ resource "aws_codepipeline" "pipeline" {
       version         = "1"
       configuration = {
         ProjectName = aws_codebuild_project.build_project.name
-      }
-    }
-    action {
-      name            = "Test"
-      category        = "Test"
-      owner           = "AWS"
-      provider        = "CodeBuild"
-      input_artifacts = ["source_output"]
-      output_artifacts = ["test_output"]
-      version         = "1"
-      configuration = {
-        ProjectName = aws_codebuild_project.test_project.name
       }
     }
   }
@@ -113,29 +101,6 @@ resource "aws_codebuild_project" "build_project" {
   source {
     type      = "CODEPIPELINE"
     buildspec = file("${path.module}/../codebuild/buildspec.yml")
-  }
-}
-
-resource "aws_codebuild_project" "test_project" {
-  name          = "techstater-starter-test-project"
-  description   = "My techstarter starter project"
-  build_timeout = "5"
-  service_role  = aws_iam_role.codebuild.arn
-
-  artifacts {
-    type = "CODEPIPELINE"
-  }
-
-  environment {
-    compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:4.0"
-    type                        = "LINUX_CONTAINER"
-    image_pull_credentials_type = "CODEBUILD"
-  }
-
-  source {
-    type      = "CODEPIPELINE"
-    buildspec = file("${path.module}/../codebuild/testspec.yml")
   }
 }
 
