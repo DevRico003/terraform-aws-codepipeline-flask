@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - echo Installing dependencies
+      - pip install -r requirements.txt
+  pre_build:
+    commands:
+      - echo Pre-build steps
+  build:
+    commands:
+      - echo Running unit tests
+      - pytest
+  post_build:
+    commands:
+      - echo Build and test completed on `date`
+
+artifacts:
+  files:
+    - app.py
+    - requirements.txt
+    - templates/**
+  discard-paths: yes

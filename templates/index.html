@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Einfache E-Commerce-Anwendung</title>
+</head>
+<body>
+    <h1>Produkte</h1>
+    <ul>
+        {% for product in products %}
+        <li>{{ product.name }} - €{{ product.price }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
