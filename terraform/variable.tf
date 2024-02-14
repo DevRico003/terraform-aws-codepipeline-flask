@@ -1,18 +1,18 @@
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "us-east-1"
+  default     = "eu-central-1"
 }
 variable "github_owner" {
   description = "GitHub repository owner"
   type        = string
-  default     = "tarasowski"
+  default     = "DevRico003"
 }
 
 variable "github_repo" {
   description = "GitHub repository name"
   type        = string
-  default     = "coolapp"
+  default     = "terraform-aws-codepipeline-flask"
 }
 
 variable "github_branch" {
