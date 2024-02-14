@@ -20,3 +20,8 @@ variable "github_branch" {
   type        = string
   default     = "main"
 }
+
+variable "github_arn" {
+  description = "GitHub repository ARN"
+  type        = string
+}

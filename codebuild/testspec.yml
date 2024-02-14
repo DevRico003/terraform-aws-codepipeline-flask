@@ -20,5 +20,7 @@ phases:
 
 artifacts:
   files:
-    - test-reports/**
+    - app.py
+    - requirements.txt
+    - templates/**
   discard-paths: yes
